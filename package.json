@@ -1,0 +1,30 @@
+{
+  "name": "techradr",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/msanigar/techradr.git",
+  "author": "Myles Sanigar <myles.sanigar@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@netlify/plugin-nextjs": "^4.30.3",
+    "daisyui": "^2.50.0",
+    "eslint": "^8.33.0",
+    "eslint-config-next": "^13.1.6",
+    "eslint-config-prettier": "^8.6.0",
+    "netlify-identity-widget": "^1.9.2",
+    "next": "^13.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4"
+  }
+}
