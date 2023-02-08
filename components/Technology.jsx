@@ -3,19 +3,19 @@ const Technology = ({ technology }) => {
     <tr>
       <th>{technology}</th>
       <td>
-        <input type="checkbox" name={technology} className="checkbox" />
+        <input type="radio" name={technology} className="radio" />
       </td>
       <td>
-        <input type="checkbox" name={technology} className="checkbox" />
+        <input type="radio" name={technology} className="radio" />
       </td>
       <td>
-        <input type="checkbox" name={technology} className="checkbox" />
+        <input type="radio" name={technology} className="radio" />
       </td>
       <td>
-        <input type="checkbox" name={technology} className="checkbox" />
+        <input type="radio" name={technology} className="radio" />
       </td>
       <td>
-        <input type="checkbox" name={technology} className="checkbox" />
+        <input type="radio" name={technology} className="radio" />
       </td>
     </tr>
   );
