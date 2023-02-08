@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Technology from './Technology';
+import { AuthContext } from '../contexts/authContext';
 
 const Techs = [
   'Service mesh',
@@ -14,6 +15,7 @@ const Techs = [
 ];
 
 const Table = () => {
+  const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
   const fetchData = async () => {
     const techradr = await axios.get('/.netlify/functions/getData');
@@ -25,6 +27,8 @@ const Table = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  console.log(user);
 
   return (
     <div className="overflow-x-auto w-full flex justify-center">
