@@ -20,7 +20,7 @@ Hero page
 Toggle btn (form/results)
 Global results|Personal form
 
-<hr
+<hr>
 
 ##### Flows
 
