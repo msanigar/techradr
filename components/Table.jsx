@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
 import Technology from './Technology';
-import { AuthContext } from '../contexts/authContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Techs = [
   'Service mesh',
