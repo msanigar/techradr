@@ -20,19 +20,16 @@ const Table = () => {
   const fetchData = async () => {
     const techradr = await axios.get('/.netlify/functions/getData');
     setData(techradr.data);
-    console.log(techradr);
-    console.log(data);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  console.log(user);
-
   return (
     <div className="overflow-x-auto w-full flex justify-center">
-      from the db: {data ? <span>{data.data['tech score'].score}</span> : null}
+      from the db: {data ? <span>{data}</span> : null} <br />
+      {user ? <span>hey, {user.email}</span> : null}
       <form>
         <table className="table w-1/2">
           <thead>
