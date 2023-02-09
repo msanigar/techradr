@@ -54,11 +54,13 @@ netlify dev
 http://localhost:8888/.netlify/functions/<functionname>
 ```
 
-```json
+```
 [userId]: {
     [techId]: [rating]
 }
-// example:
+```
+
+```json
 "22b8efaa-765b-4dc6-b301-f6cfb05881de": {
     "react": "keep",
     "knockoutjs": "meh"
