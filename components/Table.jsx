@@ -17,9 +17,10 @@ const Techs = [
 const Table = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
-  const fetchData = async () => {
-    const techradr = await axios.get('/.netlify/functions/getData');
-    setData(techradr.data);
+  const fetchData = () => {
+    axios.get('/.netlify/functions/getData').then((res) => {
+      setData(res.data[0]);
+    });
   };
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const Table = () => {
 
   return (
     <div className="overflow-x-auto w-full flex justify-center">
-      from the db: {data ? <span>{data}</span> : null} <br></br>
+      from the db: {data ? <span>{data.userid}</span> : null} <br></br>
       {user ? <span>hey, {user.email}</span> : null}
       <form>
         <table className="table w-1/2">
