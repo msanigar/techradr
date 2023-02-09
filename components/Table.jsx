@@ -28,7 +28,7 @@ const Table = () => {
 
   return (
     <div className="overflow-x-auto w-full flex justify-center">
-      from the db: {data ? <span>{data}</span> : null} <br />
+      from the db: {data ? <span>{data}</span> : null} <br></br>
       {user ? <span>hey, {user.email}</span> : null}
       <form>
         <table className="table w-1/2">
