@@ -28,39 +28,53 @@ const Table = () => {
   }, []);
 
   return (
-    <div className="overflow-x-auto w-full flex justify-center">
-      from the db: {data ? <span>{data.userid}</span> : null} <br></br>
-      {user ? <span>hey, {user.email}</span> : null}
-      <form>
-        <table className="table w-1/2">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Meh</th>
-              <th>Hold</th>
-              <th>Assess</th>
-              <th>Trial</th>
-              <th>Adopt</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Techs.map((i, k) => {
-              return <Technology key={k} technology={i} />;
-            })}
-          </tbody>
-          <tfoot>
-            <tr>
-              <th></th>
-              <th>Meh</th>
-              <th>Hold</th>
-              <th>Assess</th>
-              <th>Trial</th>
-              <th>Adopt</th>
-            </tr>
-          </tfoot>
-        </table>
-      </form>
-    </div>
+    <>
+      <div>
+        {data ? (
+          <span>
+            userid: {data.userid} - this means mongodb + netlify functions are
+            working
+          </span>
+        ) : null}{' '}
+        <br></br>
+        {user ? (
+          <span>
+            hey, {user.email} - this means netlify identity is working
+          </span>
+        ) : null}
+      </div>
+      <div className="overflow-x-auto w-full flex justify-center">
+        <form>
+          <table className="table w-1/2">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Meh</th>
+                <th>Hold</th>
+                <th>Assess</th>
+                <th>Trial</th>
+                <th>Adopt</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Techs.map((i, k) => {
+                return <Technology key={k} technology={i} />;
+              })}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th></th>
+                <th>Meh</th>
+                <th>Hold</th>
+                <th>Assess</th>
+                <th>Trial</th>
+                <th>Adopt</th>
+              </tr>
+            </tfoot>
+          </table>
+        </form>
+      </div>
+    </>
   );
 };
 

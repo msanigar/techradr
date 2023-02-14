@@ -124,3 +124,8 @@
     background: #111;
   }
 }
+
+.backgroundwall {
+  background-image: url('./img/artur-shamsutdinov-7MJpHQdGXGA-unsplash-2.jpg');
+  background-size: cover;
+}
