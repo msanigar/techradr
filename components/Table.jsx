@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from 'react';
 import Technology from './Technology';
 import { AuthContext } from '../contexts/AuthContext';
 
-const Techs = [
+const set1 = [
   'Service mesh',
   'Dark mode interfaces',
   'Scrum',
@@ -13,6 +13,44 @@ const Techs = [
   'Test plans',
   'Zero bug policy',
 ];
+
+const set2 = ['.Net/C#', 'Knockout', 'jQuery', 'React'];
+
+const Layout = ({ Techs }) => {
+  return (
+    <div className="overflow-x-auto w-full flex justify-center">
+      <form>
+        <table className="table w-1/2">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Meh</th>
+              <th>Hold</th>
+              <th>Assess</th>
+              <th>Trial</th>
+              <th>Adopt</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Techs.map((i, k) => {
+              return <Technology key={k} technology={i} />;
+            })}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th></th>
+              <th>Meh</th>
+              <th>Hold</th>
+              <th>Assess</th>
+              <th>Trial</th>
+              <th>Adopt</th>
+            </tr>
+          </tfoot>
+        </table>
+      </form>
+    </div>
+  );
+};
 
 const Table = () => {
   const { user } = useContext(AuthContext);
@@ -43,37 +81,8 @@ const Table = () => {
           </span>
         ) : null}
       </div>
-      <div className="overflow-x-auto w-full flex justify-center">
-        <form>
-          <table className="table w-1/2">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Meh</th>
-                <th>Hold</th>
-                <th>Assess</th>
-                <th>Trial</th>
-                <th>Adopt</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Techs.map((i, k) => {
-                return <Technology key={k} technology={i} />;
-              })}
-            </tbody>
-            <tfoot>
-              <tr>
-                <th></th>
-                <th>Meh</th>
-                <th>Hold</th>
-                <th>Assess</th>
-                <th>Trial</th>
-                <th>Adopt</th>
-              </tr>
-            </tfoot>
-          </table>
-        </form>
-      </div>
+      <Layout Techs={set1} />
+      <Layout Techs={set2} />
     </>
   );
 };

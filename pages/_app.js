@@ -4,7 +4,7 @@ import '../styles/globals.css';
 function MyApp({ Component, pageProps }) {
   return (
     <AuthContextProvider>
-      <div data-theme="">
+      <div data-theme="cmyk">
         <Component {...pageProps} />
       </div>
     </AuthContextProvider>
