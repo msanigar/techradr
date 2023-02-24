@@ -99,8 +99,11 @@ const Table = () => {
             ></path>
           </svg>
           <span>
-            {data ? 'MongoDB is connected!' : null}
-            {user ? ` hey, ${user.email} (id: ${user.id})` : null}
+            {data
+              ? 'MongoDB is connected!'
+              : null && user
+              ? ` hey, ${user.email} (id: ${user.id})`
+              : null}
           </span>
         </div>
       </div>
