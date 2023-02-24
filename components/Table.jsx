@@ -98,12 +98,10 @@ const Table = () => {
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             ></path>
           </svg>
-          {data ? <span>MongoDB is connected!</span> : null} <br></br>
-          {user ? (
-            <span>
-              hey, {user.email} (id: {user.email})
-            </span>
-          ) : null}
+          <span>
+            {data ? 'MongoDB is connected!' : null}
+            {user ? ` hey, ${user.email} (id: ${user.id})` : null}
+          </span>
         </div>
       </div>
       {Object.entries(jsondata).map(([key, value], i) => (
