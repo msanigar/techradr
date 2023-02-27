@@ -3,79 +3,34 @@ import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import jsondata from '../data/data.json';
 
-const Technology = ({ technology, handleChange }) => {
-  const values = ['meh', 'hold', 'assess', 'trial', 'adopt'];
-  return (
-    <tr>
-      <th>{technology}</th>
-      {values.map((i, k) => {
-        return (
-          <td key={k}>
-            <input
-              type="radio"
-              name={technology}
-              value={i}
-              className="radio"
-              onChange={handleChange}
-            />
-          </td>
-        );
-      })}
-    </tr>
-  );
-};
-
-const Layout = ({ Techs, name }) => {
-  const [techState, changeTechState] = useState(null);
-  const handleTechChange = (e) => {
-    console.log(e);
-    changeTechState({ ...techState, [e.target.name]: e.target.value });
-  };
-  useEffect(() => {
-    console.log(techState);
-  }, [techState]);
-
-  return (
-    <>
-      <div className="overflow-x-auto max-w-7xl my-6 mx-auto">
-        <form>
-          <table className="tech-table table table-fixed table-compact w-full">
-            <thead>
-              <tr>
-                <th>{name}</th>
-                <th>Meh</th>
-                <th>Hold</th>
-                <th>Assess</th>
-                <th>Trial</th>
-                <th>Adopt</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Techs.map((i, k) => {
-                return (
-                  <Technology
-                    key={k}
-                    technology={i}
-                    handleChange={handleTechChange}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
-        </form>
-      </div>
-    </>
-  );
-};
-
 const Table = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
+
+  const handleSubmit = () => {
+    axios.post('/.netlify/functions/addData', {
+      userid: user ? user.id : 'anonymous',
+      scores: techState,
+    });
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 500);
+  };
   const fetchData = () => {
     axios.get('/.netlify/functions/getData').then((res) => {
       setData(res.data[0]);
     });
   };
+  const values = ['meh', 'hold', 'assess', 'trial', 'adopt'];
+  const [techState, changeTechState] = useState(null);
+  const handleTechChange = (e) => {
+    console.log(e);
+    changeTechState({ ...techState, [e.target.name]: e.target.value });
+  };
+
+  useEffect(() => {
+    console.log(techState);
+  }, [techState]);
 
   useEffect(() => {
     fetchData();
@@ -105,13 +60,55 @@ const Table = () => {
         </div>
       </div>
       {Object.entries(jsondata).map(([key, value], i) => (
-        <Layout name={key} key={i} Techs={value} />
+        <div className="overflow-x-auto max-w-7xl my-6 mx-auto" key={i}>
+          <form>
+            <table className="tech-table table table-fixed table-compact w-full">
+              <thead>
+                <tr>
+                  <th>{key}</th>
+                  <th>Meh</th>
+                  <th>Hold</th>
+                  <th>Assess</th>
+                  <th>Trial</th>
+                  <th>Adopt</th>
+                </tr>
+              </thead>
+              <tbody>
+                {value.map((n, k) => {
+                  return (
+                    <tr key={k}>
+                      <th>{n}</th>
+                      {values.map((i, k) => {
+                        return (
+                          <td key={k}>
+                            <input
+                              type="radio"
+                              name={n}
+                              value={i}
+                              className="radio"
+                              onChange={handleTechChange}
+                            />
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </form>
+        </div>
       ))}
 
       <div className="divider"></div>
 
       <div className="flex flex-col w-full border-opacity-50">
-        <button className="btn btn-secondary w-28 m-auto">Submit</button>
+        <button
+          className="btn btn-secondary w-28 m-auto"
+          onClick={handleSubmit}
+        >
+          Submit
+        </button>
       </div>
 
       <div className="divider"></div>
