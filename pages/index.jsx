@@ -3,8 +3,11 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import Login from '../components/Login';
 import Table from '../components/Table';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function Home() {
+  const { user } = useContext(AuthContext);
   return (
     <div className={styles.container}>
       <Head>
@@ -30,7 +33,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <Table />
+        {user !== null && <Table />}
       </main>
       <footer className={styles.footer}>
         <a
