@@ -21,6 +21,13 @@ const AuthContextProvider = ({ children }) => {
     netlifyIdentity.on('logout', () => {
       setUser(null);
     });
+    // for local development
+    if (window.location.href.includes('localhost')) {
+      setUser({
+        id: '1234-1234-1234',
+        email: 'anonymous@1234.com',
+      });
+    }
 
     netlifyIdentity.init();
   }, [setUser]);
