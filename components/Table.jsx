@@ -8,23 +8,19 @@ const Table = () => {
   const [data, setData] = useState(null);
 
   const handleSubmit = () => {
-    axios.post('/.netlify/functions/addData', {
-      userid: user ? user.id : 'anonymous',
-      scores: techState,
-    });
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 500);
-  };
-  const fetchData = () => {
     axios
-      .get('/.netlify/functions/getData')
-      .then((res) => {
-        setData(res.data);
+      .post('/.netlify/functions/addData', {
+        userid: user ? user.id : 'anonymous',
+        scores: techState,
       })
       .then(() => {
-        handleCurrentUserData();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
+  };
+  const fetchData = () => {
+    axios.get('/.netlify/functions/getData').then((res) => {
+      setData(res.data);
+    });
   };
   const values = ['meh', 'hold', 'assess', 'trial', 'adopt'];
   const [techState, changeTechState] = useState(null);
@@ -44,6 +40,12 @@ const Table = () => {
   useEffect(() => {
     fetchData();
   }, [user]);
+
+  useEffect(() => {
+    handleCurrentUserData();
+  }, [data]);
+
+  setTimeout(() => {}, 1000);
 
   return (
     <>
