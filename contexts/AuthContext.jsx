@@ -24,8 +24,8 @@ const AuthContextProvider = ({ children }) => {
     // for local development
     if (window.location.href.includes('localhost')) {
       setUser({
-        id: '1234-1234-1234',
-        email: 'anonymous@1234.com',
+        id: 'anonymous',
+        email: 'anony@mous.com',
       });
     }
 

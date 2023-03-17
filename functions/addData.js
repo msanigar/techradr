@@ -6,16 +6,25 @@ exports.handler = async function (event, context) {
   const client = await MongoClient.connect(uri, { useUnifiedTopology: true });
   const db = client.db();
 
-  // need the check logic here
-  // if document with userid exists, edit that document
-  // rather than inserting a new document
-
-  console.log(event.body);
-
   try {
     const scores = await db.collection('scores');
-    const result = await scores.insertOne(JSON.parse(event.body));
-    console.log(`A document was inserted with the _id: ${result.insertedId}`);
+    const eventData = JSON.parse(event.body);
+    const getResults = await scores.findOne({ userid: eventData.userid });
+
+    let result;
+
+    if (getResults) {
+      result = await scores.updateOne(
+        { userid: eventData.userid },
+        { $set: { scores: eventData.scores } }
+      );
+      console.log(`A document was updated for user: ${eventData.userid}}`);
+    } else {
+      result = await scores.insertOne(JSON.parse(event.body));
+      console.log(
+        `A document was inserted with the _id: ${result.insertedId} for user: ${eventData.userid}}`
+      );
+    }
 
     return {
       statusCode: 200,
