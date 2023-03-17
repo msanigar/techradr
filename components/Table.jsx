@@ -17,24 +17,33 @@ const Table = () => {
     }, 500);
   };
   const fetchData = () => {
-    axios.get('/.netlify/functions/getData').then((res) => {
-      setData(res.data[0]);
-    });
+    axios
+      .get('/.netlify/functions/getData')
+      .then((res) => {
+        setData(res.data);
+      })
+      .then(() => {
+        handleCurrentUserData();
+      });
   };
   const values = ['meh', 'hold', 'assess', 'trial', 'adopt'];
   const [techState, changeTechState] = useState(null);
+  const handleCurrentUserData = () => {
+    if (data && user) {
+      const currentUserData = data.find((item) => item.userid === user.id);
+      if (currentUserData) {
+        changeTechState(currentUserData.scores);
+      }
+    }
+  };
+
   const handleTechChange = (e) => {
-    console.log(e);
     changeTechState({ ...techState, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-    console.log(techState);
-  }, [techState]);
-
-  useEffect(() => {
     fetchData();
-  }, []);
+  }, [user]);
 
   return (
     <>
@@ -85,6 +94,7 @@ const Table = () => {
                               type="radio"
                               name={n}
                               value={i}
+                              checked={techState ? techState[n] === i : false}
                               className="radio"
                               onChange={handleTechChange}
                             />
