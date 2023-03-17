@@ -6,6 +6,13 @@ import Table from '../components/Table';
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 
+// todo
+
+// create a new 'view'
+// get all the results for all users
+// default view is all results
+// add a button to switch to form / your results depending on data
+
 export default function Home() {
   const { user } = useContext(AuthContext);
   return (
